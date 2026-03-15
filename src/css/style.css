@@ -123,11 +123,24 @@ button {
   text-align: center;
 }
 
-.cart svg {
-  width: 25px;
+.cart img {
+  width: 30px;
+}
+.cart a {
+  text-decoration: none;
 }
 
-.cart:hover svg {
+.cart a span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  font-size: 30px;
+  color: #f0a868;
+  font-weight: bold;
+}
+
+.cart:hover img span {
   fill: gray;
 }
 
@@ -160,7 +173,7 @@ button {
   display: flex;
   flex-flow: row wrap;
   list-style-type: none;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .product-list a {
@@ -169,18 +182,21 @@ button {
 }
 
 /* Styles for product lists */
-.product-card {
+.li {
   flex: 1 1 45%;
   margin: 0.25em;
   padding: 0.5em;
-  border: 1px solid var(--light-grey);
   max-width: 250px;
+  border: var(--dark-grey) solid 1px;
+}
+li h2,
+li h3,
+li p {
+  margin: 0.5em 0;
 }
 
-.product-card h2,
-.product-card h3,
-.product-card p {
-  margin: 0.5em 0;
+li a img {
+  width: 80%;
 }
 
 .card__brand {

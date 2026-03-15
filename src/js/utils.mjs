@@ -13,6 +13,14 @@ export function getLocalStorage(key) {
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+
+//getParam function to handle URLSearchParam
+
+export function getParam(param){
+  const queryString= window.location.search;
+  const urlParm = new URLSearchParams(queryString);
+  return urlParm.get(param);
+}
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
@@ -20,4 +28,22 @@ export function setClick(selector, callback) {
     callback();
   });
   qs(selector).addEventListener("click", callback);
+}
+
+// Counter cart
+
+export const CounterCart=(list,template)=>{
+  if(!list || !template) return;
+  template.innerHTML=list.length;
+}
+
+export function renderListWithTemplate(templateFn, parentElement,list,position, clear=false){
+
+  if(clear){
+    parentElement.innerHTML = "";
+  }
+
+  const htmltemplate = list.map(templateFn).join("");
+    parentElement.insertAdjacentHTML(position,htmltemplate);
+
 }
