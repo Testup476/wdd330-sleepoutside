@@ -31,6 +31,8 @@ export default class productDetails {
     setLocalStorage("so-cart", cartItems);
     console.log(cartItems);
   }
+
+  // Creating a product counter
   cartcountrender() {
     const cart = getLocalStorage("so-cart");
     const cartcount = document.querySelector(".cart-count");
