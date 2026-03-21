@@ -1,9 +1,10 @@
 import { getParam } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
-import productDetails from "./ProductDetails";
+import productDetails from "./productDetails";
 
-const dataSource = new ProductData("tents");
+const category = getParam("category");
 const productId = getParam("product");
+const datasource = new ProductData(category);
 
-const product = new productDetails(productId, dataSource);
+const product = new productDetails(productId, datasource);
 product.init();

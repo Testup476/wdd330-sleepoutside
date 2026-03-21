@@ -1,10 +1,13 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
-const productCardTemplate = (product)=>{
+const productCardTemplate = (product, category)=>{
+
+    let sourceimg="";
+    (typeof product.Images === "string")? sourceimg= product.Images : sourceimg = product.Images.PrimaryMedium ?? "";
    return `
        <li>
-        <a href="product_pages/?product=${product.Id}">
-            <img src="${product.Image}" alt="Image of ${product.Name}">
+        <a href="../product_pages/index.html?product=${product.Id}&category=${category}">
+            <img src="${sourceimg}" alt="Image of ${product.NameWithoutBrand}">
             <h2 class="card__brand">${product.Brand.Name}</h2>
             <h3 class="card__name">${product.Name}</h3>
             <p class="product-card">$ ${product.FinalPrice}</p>
@@ -13,6 +16,7 @@ const productCardTemplate = (product)=>{
     `;
 }
 
+// Liste of product
 
 export default class ProductList{
     constructor(category,datasource,listElement){
@@ -26,7 +30,8 @@ export default class ProductList{
     }
 
     renderList(list){
-       renderListWithTemplate(productCardTemplate,this.listElement,list,"afterbegin",true)
+        const templateWithcategory = (product)=>productCardTemplate(product, this.category)
+       renderListWithTemplate(templateWithcategory,this.listElement,list,"afterbegin",true)
 
     }
 }

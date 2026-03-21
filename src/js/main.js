@@ -13,5 +13,4 @@ const counter = document.querySelector(".cart-count");
 datalist.init();
 
 const cartdata = getLocalStorage("so-cart");
-
 CounterCart(cartdata, counter);

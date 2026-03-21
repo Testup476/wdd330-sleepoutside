@@ -18,8 +18,19 @@ export default class ProductData {
     if(!data){
       throw new Error("no data to fetch");
     }
-    return data.json();
+    const response = await convertToJson(data);
+    const list = await response.Result ?? response;
+     
+
+    if (!Array.isArray(list)) {
+      console.warn("getData() did not return an array:", list);
+      return [];
+    }
+    return list
+    ;
   }
+
+
   async findProductById(id) {
     const products = await this.getData();
     return products.find((item) => item.Id === id);

@@ -31,14 +31,13 @@ export function setClick(selector, callback) {
 }
 
 // Counter cart
-
-export const CounterCart=(list,template)=>{
-  if(!list || !template) return;
-  template.innerHTML=list.length;
-}
+    export const CounterCart=(list,template)=>{
+      if(!list || !template) return;
+      
+      template.innerHTML=list.length;
+    }
 
 export function renderListWithTemplate(templateFn, parentElement,list,position, clear=false){
-
   if(clear){
     parentElement.innerHTML = "";
   }
