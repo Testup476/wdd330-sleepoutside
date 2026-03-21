@@ -11,6 +11,7 @@ export default class productDetails {
     this.product = await this.datasource.findProductById(this.productId);
 
     this.renderProductDetails();
+
     //Calling the cart counter
     this.cartcountrender();
 
@@ -38,28 +39,29 @@ export default class productDetails {
   }
 }
 
-//Find relevant Cart
+// Locate the relevant cart
 function findrelevantCart(cart, id) {
   return cart.filter((element) => element).find((item) => item.Id === id);
 }
 
-// Updating the Cart
+// Update cart items
 function updateCart(existingitem, product, cart) {
   !existingitem ? NewProduct(cart, product) : incrementQuantity(existingitem);
+  // if the product does not exist in the cart we add it, otherwise we just increment it quantity
 }
 
-// Incrementation of the quantity
+// Increment the item quantity
 function incrementQuantity(item) {
   item.quantity = item.quantity ? item.quantity + 1 : 1;
 }
 
-// Add new Product and save this in product
+// Add a new product and save it in storage
 function NewProduct(cart, product) {
   product.quantity = 1;
   cart.push(product);
 }
 
-// Save a Cart function
+// Function to save cart
 function saveCart(cart) {
   setLocalStorage("so-cart", cart);
 }
