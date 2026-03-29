@@ -1,7 +1,9 @@
 import { getLocalStorage, setLocalStorage, CounterCart } from "./utils.mjs";
 
+const cartItems = getLocalStorage("so-cart");
+const cart = document.querySelector(".cart-count");
+
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
   const htmlItems = cartItems.map((items) => cartItemTemplate(items));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 
@@ -18,9 +20,9 @@ function renderCartContents() {
 
 function cartItemTemplate(item) {
   const sourceimg = !item.Images
-    ? "" // if there is no image
+    ? "" // pas d'image
     : typeof item.Images === "string"
-      ? item.Images // for the tents.json file
+      ? item.Images // tents.json
       : item.Images.PrimaryMedium ?? item.Images.PrimarySmall ?? "";
 
   const newItem = `
@@ -51,10 +53,8 @@ function cartItemTemplate(item) {
 renderCartContents();
 
 // Count Cart
-const cartItemsGlobal = getLocalStorage("so-cart");
-const cart = document.querySelector(".cart-count");
 
-CounterCart(cartItemsGlobal, cart);
+CounterCart(cartItems, cart);
 
 //DELETE WORKFLOW
 
@@ -67,3 +67,15 @@ function filterCart(Id) {
   setLocalStorage("so-cart", updatedCart);
   return updatedCart;
 }
+
+// Calculate Cart Total
+
+function calculateCartTotal() {
+  const qty = cartItems.reduce(
+    (sum, item) => sum + item.quantity * item.FinalPrice,
+    0,
+  );
+  document.querySelector(".Total").innerHTML = ` Total: $${qty.toFixed(2)}`;
+}
+
+calculateCartTotal();

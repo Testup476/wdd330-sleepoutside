@@ -16,7 +16,7 @@ const productCardTemplate = (product, category)=>{
     `;
 }
 
-// Class representing a list of products
+// Liste of product
 
 export default class ProductList{
     constructor(category,datasource,listElement){
